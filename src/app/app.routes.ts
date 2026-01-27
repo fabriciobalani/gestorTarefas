@@ -5,7 +5,7 @@ import { TaskList } from './task-list/task-list';
 
 export const routes: Routes = [
     {path: 'taskList', title: 'Lista de Tarefas', component: TaskList},
-    {path: 'taskDetails', title: 'Detalhes da tarefa', component: TaskDetails},    
+    {path: 'taskDetails/:id', title: 'Detalhes da tarefa', component: TaskDetails},    
     {path:'', redirectTo: '/taskList', pathMatch: 'full'}
     
 ];

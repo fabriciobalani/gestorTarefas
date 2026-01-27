@@ -24,6 +24,8 @@ export class TaskService {
 
   addtask(task: Task){
 
+    task.id = this.tasks.length + 1;
+
     this.tasks.push(task);
 
     this.saveToLocalStorage();
