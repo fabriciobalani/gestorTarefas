@@ -10,7 +10,7 @@ export class TaskService {
 
   getTasks():Array<Task>{
 
-    const tasks = this.getFromLocalStorage();
+    this.tasks = this.getFromLocalStorage();
 
     return this.tasks;
   }
