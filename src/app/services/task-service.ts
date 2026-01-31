@@ -8,7 +8,7 @@ export class TaskService {
 
   private tasks: Array<Task> = [];
 
-  getTasks():Array<Task>{
+  getTasks(): Array<Task> {
 
     this.tasks = this.getFromLocalStorage();
 
@@ -16,52 +16,58 @@ export class TaskService {
   }
 
   getById(id: number): Task | undefined {
-    
+
     const task = this.tasks.find(c => c.id === id);
 
-    return task;    
+    return task;
   }
 
-  addtask(task: Task){
+  addtask(task: Task) {
 
-    task.id = this.tasks.length + 1;
+    //implementado ajuste na geração do Id
+
+    const timestamp = Date.now().toString().slice(-10); // Últimos 10 dígitos do tempo
+
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+
+    task.id = parseInt(timestamp + random);
 
     this.tasks.push(task);
 
     this.saveToLocalStorage();
   }
 
-  updateTasks(){
+  updateTasks() {
 
     this.saveToLocalStorage();
   }
 
-  removeTask(task: Task){
+  removeTask(task: Task) {
 
     const index = this.tasks.indexOf(task);
 
-    if (index !== -1){
-      
+    if (index !== -1) {
+
       //achou
       this.tasks.splice(index, 1);
 
       this.saveToLocalStorage();
-    }   
-    
+    }
+
   }
 
-  private saveToLocalStorage(){
+  private saveToLocalStorage() {
 
     const tasksJSON = JSON.stringify(this.tasks);
 
     localStorage.setItem('tasks', tasksJSON);
   }
 
-  private getFromLocalStorage(): Array<Task>{
+  private getFromLocalStorage(): Array<Task> {
 
     const tasksJSON = localStorage.getItem('tasks');
 
-    if(!tasksJSON){
+    if (!tasksJSON) {
 
       return new Array<Task>();
     }
